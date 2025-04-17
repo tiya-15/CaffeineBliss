@@ -1,0 +1,1084 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffeine Bliss</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        
+        :root {
+            --primary: #6F4E37;
+            --secondary: #C4A484;
+            --light: #F5F5DC;
+            --dark: #3E2723;
+            --accent: #A67C52;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        h1 {
+            font-size: 3rem;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Updated Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin: 0;
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a.nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        nav ul li a.nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a.nav-link:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a.nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .btn-login {
+            text-decoration: none;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-login:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-signup {
+            text-decoration: none;
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-signup:hover {
+            background: var(--dark);
+            transform: translateY(-2px);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .welcome-text {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .btn-logout {
+            text-decoration: none;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Cart Badge */
+        .cart-badge {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('/static/pic1.avif') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        /* About Section */
+        #about {
+            background-color: white;
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        /* Products Section */
+        #products {
+            background-color: var(--light);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        .product-info .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Reviews Section */
+        #reviews {
+            background-color: white;
+        }
+        
+        .reviews-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .review-card {
+            min-width: 350px;
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            scroll-snap-align: start;
+        }
+        
+        .review-header { 
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .review-header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .review-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .review-stars {
+            color: var(--accent);
+        }
+        
+        /* Connect Section */
+        #connect {
+            background-color: var(--light);
+        }
+        
+        .connect-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .connect-info {
+            text-align: center;
+        }
+        
+        .connect-info p {
+            margin-bottom: 30px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+       
+        /* Cart/Drafts Page */
+        #cart-page {
+            display: none;
+            min-height: 100vh;
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-items {
+            margin-bottom: 30px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cart-item-actions button {
+            background-color: var(--light);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-item-actions button:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .cart-summary {
+            border-top: 2px solid var(--primary);
+            padding-top: 20px;
+        }
+        
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .cart-summary-row.total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .footer-logo h2 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 0;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .about-img, .about-content {
+                width: 100%;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .cart-item-actions {
+                align-self: flex-end;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .review-card {
+                min-width: 280px;
+            }
+            
+            .auth-container, .cart-container {
+                padding: 20px;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png" alt="Caffeine Bliss">
+                <h1>Caffeine Bliss</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#connect" class="nav-link">Contact</a></li>
+                    <li class="cart-badge">
+                        <a href="#" id="cart-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <div class="mobile-menu-btn" id="mobile-menu-btn">
+                    </div>
+                    {% if user.is_authenticated %}
+                    <li class="user-profile">
+                        <span class="welcome-text">Welcome, {{ user.username }}</span>
+                        <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="auth-buttons">
+                        <a href="{% url 'login' %}" class="btn-login">Login</a>
+                        <a href="{% url 'signup' %}" class="btn-signup">Sign Up</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>From ethical soil to your sacred morning ritual.</h1>
+                    <p>Discover the perfect blend of quality, flavor, and aroma in every cup at Caffeine Bliss. Cold brewed for 18 hours—because patience makes perfection.</p>
+                    <div class="hero-btns">
+                        <a href="#products" class="btn">Our Menu</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <h2>Our Story</h2>
+                <div class="about-container">
+                    <div class="about-img">
+                        <img src="{% static 'pic.jpg'%}">
+                    </div>
+                    <div class="about-content">
+                        <h3>Brewing Excellence Since 2010</h3>
+                        <p>Caffeine Bliss started as a cozy neighborhood café and has blossomed into a beloved sanctuary for coffee enthusiasts across India.</p>
+                        <p>We embark on journeys to the lush coffee plantations of India and beyond, sourcing the finest beans while nurturing direct relationships with farmers who share our commitment to sustainable and ethical practices. Our expert roasters skillfully bring out the rich flavors and aromas unique to each region, ensuring every cup tells a story.</p>
+                        <p>At Caffeine Bliss, we believe coffee is more than just a beverage—it's a connection, a cherished ritual, and a delightful experience that we are honored to share with you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products">
+            <div class="container">
+                <h2>Our Products</h2>
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Espresso">
+                        </div>
+                        <div class="product-info">
+                            <h3>Classic Espresso</h3>
+                            <p>Our signature blend with notes of dark chocolate and caramel, perfect as a shot or in your favorite milk-based drink.</p>
+                            <div class="price">₹250</div>
+                            <button class="btn add-to-cart" data-id="1" data-name="Classic Espresso" data-price="250" data-image="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pour Over">
+                        </div>
+                        <div class="product-info">
+                            <h3>Single Origin Pour Over</h3>
+                            <p>Ethiopian Yirgacheffe with floral and citrus notes, hand-brewed to highlight its delicate complexity.</p>
+                            <div class="price">₹350</div>
+                            <button class="btn add-to-cart" data-id="2" data-name="Single Origin Pour Over" data-price="350" data-image="https://images.unsplash.com/photo-1534778101976-62847782c213?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cold Brew">
+                        </div>
+                        <div class="product-info">
+                            <h3>Nitro Cold Brew</h3>
+                            <p>Smooth, creamy cold brew infused with nitrogen for a velvety texture and cascading effect.</p>
+                            <div class="price">₹300</div>
+                            <button class="btn add-to-cart" data-id="3" data-name="Nitro Cold Brew" data-price="300" data-image="https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews">
+            <div class="container">
+                <h2>What Our Customers Say</h2>
+                <div class="reviews-container">
+                    <!-- Review 1 -->
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="#" alt="Sarah J.">
+                            <div class="review-info">
+                                <h4>A .</h4>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"The best coffee in town! I come here every morning before work. The baristas know my order by heart and always make me feel welcome. The Ethiopian pour over is my absolute favorite."</p>
+                    </div>
+                    
+                    <!-- Review 2 -->
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="#" alt="Michael T.">
+                            <div class="review-info">
+                                <h4>X.</h4>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"As a coffee snob, I'm very particular about my brew. Caffeine Bliss never disappoints. Their attention to detail and knowledge of coffee is impressive. The nitro cold brew is a game-changer!"</p>
+                    </div>
+                    
+                    <!-- Review 3 -->
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="#" alt="Emma R.">
+                            <div class="review-info">
+                                <h4>Y.</h4>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>"The atmosphere here is so cozy and inviting. I love bringing my laptop and working for hours with their bottomless house blend. The staff is friendly and the music is always perfectly curated."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Connect Section -->
+        <section id="connect">
+            <div class="container">
+                <h2>Connect With Us</h2>
+                <div class="connect-container">
+                    <div class="connect-info">
+                        <h3>Visit Our Café</h3>
+                        <p>XYZ, MOHALI</p>
+                        <p>Contact: 62837xxxxx</p>
+                        <h3 style="margin-top: 30px;">Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart/Drafts Page (Removed the login and signup sections) -->
+    <section id="cart-page">
+        <div class="container">
+            <div class="cart-container">
+            
+                <br>
+                <h2>Your Coffee Cart</h2>
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items will be added here dynamically -->
+                    <p class="empty-cart-message">Your cart is empty. Add some delicious coffee!</p>
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="cart-summary-row">
+                        <span>Subtotal</span>
+                        <span id="subtotal">₹0</span>
+                    </div>
+                    <div class="cart-summary-row">
+                        <span>Tax (5%)</span>
+                        <span id="tax">₹0</span>
+                    </div>
+                    <div class="cart-summary-row total">
+                        <span>Total</span>
+                        <span id="total">₹0</span>
+                    </div>
+                    
+                    <button class="btn" id="checkout-btn" style="width: 100%; margin-top: 20px;">Proceed to Checkout</button>
+                    <button class="btn btn-outline" id="continue-shopping" style="width: 100%; margin-top: 10px;">Continue Shopping</button>
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png" alt="Caffeine Bliss Logo">
+                    <h2>Caffeine Bliss</h2>
+                </div>
+               
+                <p class="copyright">© 2025 Caffeine Bliss. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Helper functions
+        const $ = s => document.querySelector(s),
+              $$ = s => document.querySelectorAll(s),
+              saveCart = () => localStorage.setItem('cart', JSON.stringify(cart)),
+              showNotification = (msg) => {
+                const note = document.createElement('div');
+                note.className = 'cart-notification';
+                note.textContent = msg;
+                document.body.appendChild(note);
+                setTimeout(() => note.remove(), 2500);
+              };
+      
+        // Cart operations
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        const updateCartCount = () => {
+          $('.cart-count').textContent = cart.reduce((t, i) => t + i.quantity, 0);
+        };
+      
+        const updateCartTotals = () => {
+          const subtotal = cart.reduce((t, i) => t + i.price * i.quantity, 0),
+                tax = subtotal * 0.05;
+          $('#subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+          $('#tax').textContent = `₹${tax.toFixed(2)}`;
+          $('#total').textContent = `₹${(subtotal + tax).toFixed(2)}`;
+        };
+      
+        const renderCart = () => {
+          const container = $('#cart-items'),
+                emptyMsg = container.querySelector('.empty-cart-message');
+          
+          emptyMsg.style.display = cart.length ? 'none' : 'block';
+          $('#checkout-btn').style.display = cart.length ? 'block' : 'none';
+          
+          container.innerHTML = cart.map(item => `
+            <div class="cart-item">
+              <div class="cart-item-info">
+                <div class="cart-item-img"><img src="${item.image}" alt="${item.name}"></div>
+                <div><h3>${item.name}</h3><p>₹${item.price}</p></div>
+              </div>
+              <div class="cart-item-actions">
+                <button class="decrease-quantity" data-id="${item.id}">-</button>
+                <span>${item.quantity}</span>
+                <button class="increase-quantity" data-id="${item.id}">+</button>
+                <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `).join('');
+          
+          updateCartTotals();
+        };
+      
+        // Event handlers
+        $('#continue-shopping')?.addEventListener('click', () => window.location.href = '/');
+      
+        $$('.add-to-cart').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const {id, name, price, image} = btn.dataset,
+                  existing = cart.find(i => i.id === id);
+            
+            existing ? existing.quantity++ : cart.push({id, name, price: parseFloat(price), image, quantity: 1});
+            saveCart();
+            updateCartCount();
+            showNotification(`${name} added to cart!`);
+          });
+        });
+      
+        $('#cart-items')?.addEventListener('click', e => {
+          const btn = e.target.closest('button[data-id]');
+          if (!btn) return;
+          
+          const id = btn.dataset.id,
+                idx = cart.findIndex(i => i.id === id);
+          
+          if (btn.classList.contains('decrease-quantity')) {
+            cart[idx].quantity > 1 ? cart[idx].quantity-- : cart.splice(idx, 1);
+          } else if (btn.classList.contains('increase-quantity')) {
+            cart[idx].quantity++;
+          } else if (btn.classList.contains('remove-item')) {
+            cart.splice(idx, 1);
+          }
+          
+          saveCart();
+          updateCartCount();
+          renderCart();
+        });
+      
+        $('#cart-link').addEventListener('click', e => {
+          e.preventDefault();
+          $('#main-content').style.display = 'none';
+          $('#cart-page').style.display = 'block';
+          renderCart();
+        });
+      
+        // Initialize
+        $('#cart-page').style.display = 'none';
+        updateCartCount();
+      </script>
+      
+      <style>
+        .cart-notification {
+          position: fixed; 
+          bottom: 20px; 
+          right: 20px;
+          background: var(--primary); 
+          color: #fff;
+          padding: 10px 20px; 
+          border-radius: 5px;
+          box-shadow: 0 3px 10px rgba(0,0,0,0.2); 
+          z-index: 1000;
+          opacity: 1;
+          transition: opacity 0.5s;
+        }
+      </style>
+      
+      
+</body>
+</html>
+
