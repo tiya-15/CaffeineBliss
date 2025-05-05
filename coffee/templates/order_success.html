@@ -1,0 +1,369 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Successful | Caffeine Bliss</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6F4E37;
+            --secondary: #C4A484;
+            --light: #F5F5DC;
+            --dark: #3E2723;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 40px 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .success-container {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .order-details {
+            margin: 30px 0;
+            text-align: left;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            width: 150px;
+            color: var(--dark);
+        }
+        
+        /* New Order Status Timeline Styles */
+        .status-timeline {
+            margin: 30px 0;
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .status-step {
+            position: relative;
+            padding-bottom: 30px;
+        }
+        
+        .status-step:last-child {
+            padding-bottom: 0;
+        }
+        
+        .status-step i {
+            position: absolute;
+            left: -45px;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .status-step.active i {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .status-step.completed i {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+        }
+        
+        .status-step::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 30px;
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        .status-step:last-child::before {
+            display: none;
+        }
+        
+        .status-step.completed::before {
+            background: #4CAF50;
+        }
+        
+        .status-text {
+            font-weight: 600;
+        }
+        
+        .status-date {
+            color: #666;
+            font-size: 0.9em;
+            display: block;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            margin-left: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png" alt="Caffeine Bliss">
+                <h1>Caffeine Bliss</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="success-container">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h1>Order Placed Successfully!</h1>
+                <p class="lead">Thank you for your order. A confirmation has been sent to {{ order.email }}</p>
+                
+                <div class="order-details">
+                    <h3>Order Summary</h3>
+                    <div class="detail-row">
+                        <span class="detail-label">Order Number:</span>
+                        <span>#{{ order.id }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Date:</span>
+                        <span>{{ order.created_at|date:"F j, Y H:i" }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Customer:</span>
+                        <span>{{ order.name }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Payment Method:</span>
+                        <span>{{ order.get_payment_method_display }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Total Amount:</span>
+                        <span>₹{{ order.total_amount|floatformat:2 }}</span>
+                    </div>
+                </div>
+                
+                <div class="status-timeline">
+                    <h3>Order Status</h3>
+                    <div class="status-step completed">
+                        <i class="fas fa-check"></i>
+                        <span class="status-text">Order Confirmed</span>
+                        <span class="status-date">{{ order.created_at|date:"M j, H:i" }}</span>
+                    </div>
+                    <div class="status-step active">
+                        <i class="fas fa-utensils"></i>
+                        <span class="status-text">Preparing Your Order</span>
+                        <span class="status-date">Estimated completion: Today</span>
+                    </div>
+                    <div class="status-step">
+                        <i class="fas fa-truck"></i>
+                        <span class="status-text">On Its Way</span>
+                        <span class="status-date">Expected: 1-2 business days</span>
+                    </div>
+                    <div class="status-step">
+                        <i class="fas fa-home"></i>
+                        <span class="status-text">Delivered</span>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="{% url 'home' %}" class="btn">Continue Shopping</a>
+                    <button class="btn btn-secondary" onclick="alert('Order tracking will be available soon!')">
+                        Track Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="copyright">© 2025 Caffeine Bliss. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Clear cart after successful order
+        localStorage.removeItem('cart');
+        
+        // Optional: Add animation to status steps
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.status-step');
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.style.opacity = '1';
+                    step.style.transform = 'translateX(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get order ID from the URL or a data attribute
+            const urlParts = window.location.pathname.split('/');
+            const orderId = urlParts[urlParts.length - 2]; // Gets the ID from /order-success/123/
+            
+            // Alternative: Use a data attribute on a div
+            // <div id="order-data" data-order-id="{{ order.id }}"></div>
+            // const orderId = document.getElementById('order-data').dataset.orderId;
+            
+            fetch(`/api/orders/${orderId}/`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Order details:', data);
+                // Update your status timeline here
+                updateStatusTimeline(data);
+            })
+            .catch(error => console.error('Error:', error));
+        
+            function updateStatusTimeline(orderData) {
+                // Implement your timeline update logic here
+                const statusSteps = document.querySelectorAll('.status-step');
+                
+                // Example: Mark steps as completed based on status
+                if (orderData.status === 'completed') {
+                    statusSteps.forEach(step => step.classList.add('completed'));
+                }
+            }
+        });
+        </script>
+</body>
+</html>

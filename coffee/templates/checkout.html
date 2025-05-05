@@ -1,0 +1,432 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Caffeine Bliss</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6F4E37;
+            --secondary: #C4A484;
+            --light: #F5F5DC;
+            --dark: #3E2723;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 40px 0;
+            width: 100%;
+        }
+        
+        .checkout-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .checkout-form {
+            flex: 2;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .order-summary {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            align-self: flex-start;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .payment-methods {
+            margin-top: 30px;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-option:hover {
+            border-color: var(--primary);
+        }
+        
+        .payment-option input {
+            margin-right: 15px;
+        }
+        
+        .payment-icon {
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 30px;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .checkout-container {
+                flex-direction: column;
+            }
+            
+            .order-summary {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png" alt="Caffeine Bliss">
+                <h1>Caffeine Bliss</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h1>Checkout</h1>
+            
+            <div class="checkout-container">
+                <div class="checkout-form">
+                    <h2>Shipping Information</h2>
+                    <form method="POST" action="{% url 'checkout' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Shipping Address</label>
+                            <textarea id="address" name="address" rows="3" class="form-control" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Order Notes (Optional)</label>
+                            <textarea id="notes" name="notes" rows="2" placeholder="Any special instructions?" class="form-control" required ></textarea>
+                        </div>
+                        
+                        <h2>Payment Method</h2>
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="cod" checked>
+                                <i class="fas fa-money-bill-wave payment-icon"></i>
+                                <div>
+                                    <h3>Cash on Delivery</h3>
+                                    <p>Pay when you receive your order</p>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card">
+                                <i class="fas fa-credit-card payment-icon"></i>
+                                <div>
+                                    <h3>Credit/Debit Card</h3>
+                                    <p>Pay securely with your card</p>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="upi">
+                                <i class="fas fa-mobile-alt payment-icon"></i>
+                                <div>
+                                    <h3>UPI Payment</h3>
+                                    <p>Pay via PhonePe, Google Pay, etc.</p>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block btn-lg mt-4">Place Order</button>
+                    </form>
+                </div>
+                
+                <div class="order-summary">
+                    <h2>Your Order</h2>
+                    <div id="order-items">
+                        <!-- Cart items will be loaded here via JavaScript -->
+                        {% for item in cart_items %}
+                        <div class="order-item">
+                            <span>{{ item.name }} × {{ item.quantity }}</span>
+                            <span>₹{{ item.total_price }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="order-total">
+                        <span>Total</span>
+                        <span id="order-total">₹{{ total }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="copyright">© 2025 Caffeine Bliss. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get cart from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const orderItems = document.getElementById('order-items');
+        const orderTotal = document.getElementById('order-total');
+        
+        if (cart.length === 0) {
+            orderItems.innerHTML = '<p>Your cart is empty</p>';
+            orderTotal.textContent = '₹0';
+            return;
+        }
+        
+        let itemsHTML = '';
+        let subtotal = 0;
+        
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+            
+            itemsHTML += `
+                <div class="order-item">
+                    <span>${item.name} × ${item.quantity}</span>
+                    <span>₹${itemTotal.toFixed(2)}</span>
+                </div>
+            `;
+        });
+        
+        const tax = subtotal * 0.05;
+        const total = subtotal + tax;
+        
+        itemsHTML += `
+            <div class="order-item">
+                <span>Tax (5%)</span>
+                <span>₹${tax.toFixed(2)}</span>
+            </div>
+        `;
+        
+        orderItems.innerHTML = itemsHTML;
+        orderTotal.textContent = `₹${total.toFixed(2)}`;
+        
+        // Set cart data as cookie for server-side access
+        document.cookie = `cart=${JSON.stringify(cart)}; path=/`;
+    });
+
+        // Load cart items from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const orderItems = document.getElementById('order-items');
+            const orderTotal = document.getElementById('order-total');
+            
+            if (cart.length === 0) {
+                orderItems.innerHTML = '<p>Your cart is empty</p>';
+                orderTotal.textContent = '₹0';
+                return;
+            }
+            
+            let itemsHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                itemsHTML += `
+                    <div class="order-item">
+                        <span>${item.name} × ${item.quantity}</span>
+                        <span>₹${itemTotal.toFixed(2)}</span>
+                    </div>
+                `;
+            });
+            
+            const tax = total * 0.05;
+            const grandTotal = total + tax;
+            
+            itemsHTML += `
+                <div class="order-item">
+                    <span>Tax (5%)</span>
+                    <span>₹${tax.toFixed(2)}</span>
+                </div>
+            `;
+            
+            orderItems.innerHTML = itemsHTML;
+            orderTotal.textContent = `₹${grandTotal.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>
