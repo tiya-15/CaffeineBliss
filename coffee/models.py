@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # coffee/models.py
 from django.db import models
 
@@ -25,8 +24,3 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity}x {self.product_name} (Order #{self.order.id})"
-=======
-from django.db import models
-from django.contrib.auth.models import User
-# Create your models here.
->>>>>>> b17a32e964cc2db86b6c821185b65079e1521510

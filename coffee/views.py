@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-<<<<<<< HEAD
 from django.http import JsonResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
@@ -14,14 +13,6 @@ import json
 def home(request):
     return render(request, 'index.html')
 
-=======
-from .models import *
-
-def home(request):
-    return render(request, 'index.html')
-
-# Define a view function for the login page
->>>>>>> b17a32e964cc2db86b6c821185b65079e1521510
 def login_page(request):
     if request.user.is_authenticated:
         return redirect('/')
@@ -52,10 +43,6 @@ def logout_page(request):
     messages.success(request, "You have been logged out successfully.")
     return redirect('/')
 
-<<<<<<< HEAD
-=======
-# Define a view function for the registration page
->>>>>>> b17a32e964cc2db86b6c821185b65079e1521510
 def register_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -89,7 +76,6 @@ def register_page(request):
         except Exception as e:
             messages.error(request, "An error occurred during registration. Please try again.")
             return redirect('/signup/')
-<<<<<<< HEAD
     return render(request, 'signup.html')
 # coffee/views.py
 def order_tracking(request, order_id):
@@ -183,7 +169,3 @@ def checkout(request):
         'tax': tax,
         'total': total
     })
-=======
-    
-    return render(request, 'signup.html')
->>>>>>> b17a32e964cc2db86b6c821185b65079e1521510
