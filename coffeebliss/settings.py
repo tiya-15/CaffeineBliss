@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'coffee',
+<<<<<<< HEAD
     'rest_framework',
     'corsheaders',
+=======
+>>>>>>> b17a32e964cc2db86b6c821185b65079e1521510
 ]
 
 MIDDLEWARE = [
@@ -133,6 +136,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< HEAD
 
 #PAGINATION
 
@@ -143,3 +147,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+=======
+>>>>>>> b17a32e964cc2db86b6c821185b65079e1521510

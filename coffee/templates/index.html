@@ -739,10 +739,13 @@
                     <li class="user-profile">
                         <span class="welcome-text">Welcome, {{ user.username }}</span>
                         <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
+<<<<<<< HEAD
                         <div id="order-history" class="order-history-section" style="display: none; margin-top: 10px; padding: 15px; background: white; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                             <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Your Order History</h3>
                             <div id="orders-list" style="max-height: 300px; overflow-y: auto;"></div>
                         </div>
+=======
+>>>>>>> b17a32e964cc2db86b6c821185b65079e1521510
                     </li>
                     {% else %}
                     <li class="auth-buttons">
@@ -751,8 +754,11 @@
                     </li>
                     {% endif %}
                 </ul>
+<<<<<<< HEAD
                 
                 
+=======
+>>>>>>> b17a32e964cc2db86b6c821185b65079e1521510
             </nav>
         </div>
     </header>
@@ -810,7 +816,10 @@
                     
                     <!-- Product 2 -->
                     <div class="product-card">
+<<<<<<< HEAD
                         
+=======
+>>>>>>> b17a32e964cc2db86b6c821185b65079e1521510
                         <div class="product-img">
                             <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pour Over">
                         </div>
@@ -948,7 +957,13 @@
                     </div>
                     
                     <button class="btn" id="checkout-btn" style="width: 100%; margin-top: 20px;">Proceed to Checkout</button>
+<<<<<<< HEAD
                     <button class="btn btn-outline" id="continue-shopping" style="width: 100%; margin-top: 10px;" >Continue Shopping</button>
+=======
+                    <button class="btn btn-outline" id="continue-shopping" style="width: 100%; margin-top: 10px;">Continue Shopping</button>
+                    
+
+>>>>>>> b17a32e964cc2db86b6c821185b65079e1521510
                 </div>
             </div>
         </div>
@@ -968,6 +983,7 @@
         </div>
     </footer>
     <script>
+<<<<<<< HEAD
        // Helper functions
 const $ = s => document.querySelector(s),
       $$ = s => document.querySelectorAll(s),
@@ -1097,3 +1113,124 @@ updateCartCount();
     </script>
 </body>
 </html>
+=======
+        // Helper functions
+        const $ = s => document.querySelector(s),
+              $$ = s => document.querySelectorAll(s),
+              saveCart = () => localStorage.setItem('cart', JSON.stringify(cart)),
+              showNotification = (msg) => {
+                const note = document.createElement('div');
+                note.className = 'cart-notification';
+                note.textContent = msg;
+                document.body.appendChild(note);
+                setTimeout(() => note.remove(), 2500);
+              };
+      
+        // Cart operations
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        const updateCartCount = () => {
+          $('.cart-count').textContent = cart.reduce((t, i) => t + i.quantity, 0);
+        };
+      
+        const updateCartTotals = () => {
+          const subtotal = cart.reduce((t, i) => t + i.price * i.quantity, 0),
+                tax = subtotal * 0.05;
+          $('#subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+          $('#tax').textContent = `₹${tax.toFixed(2)}`;
+          $('#total').textContent = `₹${(subtotal + tax).toFixed(2)}`;
+        };
+      
+        const renderCart = () => {
+          const container = $('#cart-items'),
+                emptyMsg = container.querySelector('.empty-cart-message');
+          
+          emptyMsg.style.display = cart.length ? 'none' : 'block';
+          $('#checkout-btn').style.display = cart.length ? 'block' : 'none';
+          
+          container.innerHTML = cart.map(item => `
+            <div class="cart-item">
+              <div class="cart-item-info">
+                <div class="cart-item-img"><img src="${item.image}" alt="${item.name}"></div>
+                <div><h3>${item.name}</h3><p>₹${item.price}</p></div>
+              </div>
+              <div class="cart-item-actions">
+                <button class="decrease-quantity" data-id="${item.id}">-</button>
+                <span>${item.quantity}</span>
+                <button class="increase-quantity" data-id="${item.id}">+</button>
+                <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `).join('');
+          
+          updateCartTotals();
+        };
+      
+        // Event handlers
+        $('#continue-shopping')?.addEventListener('click', () => window.location.href = '/');
+      
+        $$('.add-to-cart').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const {id, name, price, image} = btn.dataset,
+                  existing = cart.find(i => i.id === id);
+            
+            existing ? existing.quantity++ : cart.push({id, name, price: parseFloat(price), image, quantity: 1});
+            saveCart();
+            updateCartCount();
+            showNotification(`${name} added to cart!`);
+          });
+        });
+      
+        $('#cart-items')?.addEventListener('click', e => {
+          const btn = e.target.closest('button[data-id]');
+          if (!btn) return;
+          
+          const id = btn.dataset.id,
+                idx = cart.findIndex(i => i.id === id);
+          
+          if (btn.classList.contains('decrease-quantity')) {
+            cart[idx].quantity > 1 ? cart[idx].quantity-- : cart.splice(idx, 1);
+          } else if (btn.classList.contains('increase-quantity')) {
+            cart[idx].quantity++;
+          } else if (btn.classList.contains('remove-item')) {
+            cart.splice(idx, 1);
+          }
+          
+          saveCart();
+          updateCartCount();
+          renderCart();
+        });
+      
+        $('#cart-link').addEventListener('click', e => {
+          e.preventDefault();
+          $('#main-content').style.display = 'none';
+          $('#cart-page').style.display = 'block';
+          renderCart();
+        });
+      
+        // Initialize
+        $('#cart-page').style.display = 'none';
+        updateCartCount();
+      </script>
+      
+      <style>
+        .cart-notification {
+          position: fixed; 
+          bottom: 20px; 
+          right: 20px;
+          background: var(--primary); 
+          color: #fff;
+          padding: 10px 20px; 
+          border-radius: 5px;
+          box-shadow: 0 3px 10px rgba(0,0,0,0.2); 
+          z-index: 1000;
+          opacity: 1;
+          transition: opacity 0.5s;
+        }
+      </style>
+      
+      
+</body>
+</html>
+
+>>>>>>> b17a32e964cc2db86b6c821185b65079e1521510

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+<<<<<<< HEAD
 from coffee import views
 
 #for API
@@ -42,6 +43,16 @@ urlpatterns = [
     #API ----
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+=======
+from coffee.views import *
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', home, name='home'),
+    path('login/', login_page, name='login'),
+    path('signup/', register_page, name='signup'),
+    path('logout/', logout_page, name='logout'),
+>>>>>>> b17a32e964cc2db86b6c821185b65079e1521510
 ]
 
 # Serve static and media files in development
